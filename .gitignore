@@ -5,3 +5,5 @@ buckaroo
 buckaroo-packages
 BUCKAROO_DEPS
 .buckconfig.local
+.buckconfig.d
+buckaroo_macros.bzl
