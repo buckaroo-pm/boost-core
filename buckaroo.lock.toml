@@ -10,7 +10,7 @@ target = "//:config"
 
 [lock."github.com/buckaroo-pm/boost-assert"]
 versions = [ "branch=master" ]
-revision = "417f80abf86251b29609a9747dae7756236699aa"
+revision = "f9d6a7b63ef2902777b6078fdebc54e7a57aac03"
 
 [lock."github.com/buckaroo-pm/boost-config"]
 versions = [ "branch=master" ]
