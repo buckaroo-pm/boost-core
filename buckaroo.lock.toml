@@ -1,0 +1,17 @@
+manifest = "f7db04296fbdb97729c4d6fef3b4355efbb8047a5bb6bc98be2b0a7ce7a07fd6"
+
+[[dependency]]
+package = "github.com/buckaroo-pm/boost-assert"
+target = "//:assert"
+
+[[dependency]]
+package = "github.com/buckaroo-pm/boost-config"
+target = "//:config"
+
+[lock."github.com/buckaroo-pm/boost-assert"]
+versions = [ "1.69.0" ]
+revision = "eaf4d07bb5dca192ce914ead47a3567bdb1b9ff0"
+
+[lock."github.com/buckaroo-pm/boost-config"]
+versions = [ "1.69.0" ]
+revision = "789954938e5acfbba080099137a47434f1201cca"
