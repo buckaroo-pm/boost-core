@@ -1,0 +1,9 @@
+targets = [ "//:core" ]
+
+[[dependency]]
+package = "github.com/buckaroo-pm/boost-config"
+version = "1.65.1"
+
+[[dependency]]
+package = "github.com/buckaroo-pm/boost-assert"
+version = "1.65.1"
