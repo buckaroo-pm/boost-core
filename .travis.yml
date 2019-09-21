@@ -1,39 +1,43 @@
-# Copyright 2016 Peter Dimov
-# Distributed under the Boost Software License, Version 1.0.
-# (See accompanying file LICENSE_1_0.txt or copy at http://boost.org/LICENSE_1_0.txt)
-
 language: cpp
+sudo: true
+dist: bionic
 
-sudo: false
+# TODO: May be required for Travis on Windows
+# filter_secrets: false
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - gcc-6
+      - make
+      - pkg-config
+      - zip
+      - g++
+      - zlib1g-dev
+      - unzip
+      - python3
 
 os:
   - linux
   - osx
+  - windows
 
-branches:
-  only:
-    - master
-    - develop
+env:
+  - BUCKAROO_VERSION=v2.2.0 PKG_CONFIG_PATH=/usr/lib/pkgconfig
+  - BUCKAROO_VERSION=bazel-alpha-3 BUCKAROO_USE_BAZEL=1 PKG_CONFIG_PATH=/usr/lib/pkgconfig MSYS2_ARG_CONV_EXCL="//"
 
-install:
-  - git clone -b $TRAVIS_BRANCH https://github.com/boostorg/boost.git boost
-  - cd boost
-  - git submodule init libs/assert
-  - git submodule init libs/config
-  - git submodule init libs/core
-  - git submodule init libs/predef
-  - git submodule init libs/static_assert
-  - git submodule init libs/type_traits
-  - git submodule init tools/build
-  - git submodule init tools/inspect
-  - git submodule update
-  - cd libs/core
-  - git checkout -q $TRAVIS_COMMIT
-  - cd ../..
-  - ./bootstrap.sh
-  - ./b2 headers
+cache:
+  directories:
+    - $HOME/.buckaroo/cache
+    - $TRAVIS_BUILD_DIR/bin
+
+osx_image: xcode9.3
+
+before_install:
+  - travis_wait ./travis/before-install-$TRAVIS_OS_NAME.sh
 
 script:
-  - TOOLSET=gcc,clang
-  - if [ $TRAVIS_OS_NAME == osx ]; then TOOLSET=clang; fi
-  - ./b2 libs/core/test toolset=$TOOLSET
+  - travis_wait ./travis/script.sh
